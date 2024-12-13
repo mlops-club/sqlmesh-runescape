@@ -1,5 +1,5 @@
 MODEL (
-    name 'sqlmesh_example.hourly_scrape',
+    name sqlmesh_example.hourly_scrape,
     kind INCREMENTAL_BY_TIME_RANGE (
         time_column 'ts'
     ),
