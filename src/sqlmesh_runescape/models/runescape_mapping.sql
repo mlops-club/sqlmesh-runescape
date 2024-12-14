@@ -7,7 +7,7 @@ MODEL (
   );
 
   SELECT
-    examine, id, members, lowalch, 'limit', 'value', highalch, icon, 'name'
+    examine, id::INT, members, lowalch, 'limit', 'value', highalch, icon, 'name'
   FROM 
     read_json_auto('https://prices.runescape.wiki/api/v1/osrs/mapping')
   

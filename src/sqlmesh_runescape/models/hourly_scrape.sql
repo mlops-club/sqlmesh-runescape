@@ -1,11 +1,12 @@
 MODEL (
     name sqlmesh_example.hourly_scrape,
     kind INCREMENTAL_BY_TIME_RANGE (
-        time_column 'ts'
+        time_column ts
     ),
+    -- kind FULL,
     start '2024-12-12',
     cron '@hourly',
-    grain ('id', 'ts'),
+    grain (item_id, ts),
     description 'Scrapes hourly price data from RuneScape API using UTC time as an integer.'
 );
 
@@ -13,7 +14,7 @@ MODEL (
   
 SELECT
     ts,
-    key AS item_id,
+    key::INT AS id,
     json_extract(json_data, CONCAT('$.', key, '.avgHighPrice'))::INTEGER AS avg_high_price,
     json_extract(json_data, CONCAT('$.', key, '.highPriceVolume'))::INTEGER AS high_price_volume,
     json_extract(json_data, CONCAT('$.', key, '.avgLowPrice'))::INTEGER AS avg_low_price,
